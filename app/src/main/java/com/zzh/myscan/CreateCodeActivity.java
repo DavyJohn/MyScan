@@ -19,14 +19,16 @@ import com.zzh.myscan.zxing.encode.EncodingHandler;
 
 import java.io.UnsupportedEncodingException;
 
-import butterknife.ButterKnife;
 import butterknife.Bind;
+import butterknife.ButterKnife;
 import butterknife.OnClick;
+
 
 /**
  * Created by 刘红亮 on 2015/9/24 14:37.
+ * //SHENGCHE
  */
-public class CreateCodeActivity extends Activity {
+public class CreateCodeActivity extends BaseActivity {
     @Bind(R.id.et_code_key)
     EditText etCodeKey;
     @Bind(R.id.btn_create_code)

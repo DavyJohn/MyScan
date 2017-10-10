@@ -39,15 +39,17 @@ import com.zzh.myscan.zxing.ScanManager;
 import com.zzh.myscan.zxing.decode.DecodeThread;
 import com.zzh.myscan.zxing.decode.Utils;
 
-import butterknife.ButterKnife;
 import butterknife.Bind;
+
+import butterknife.ButterKnife;
+
 
 /**
  * 二维码扫描使用
  *
  * @author 刘红亮  2015年4月29日  下午5:49:45
  */
-public final class CommonScanActivity extends AppCompatActivity implements ScanListener, View.OnClickListener {
+public final class CommonScanActivity extends BaseActivity implements ScanListener, View.OnClickListener {
     static final String TAG = CommonScanActivity.class.getSimpleName();
     SurfaceView scanPreview = null;
     View scanContainer;

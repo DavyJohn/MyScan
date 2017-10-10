@@ -106,7 +106,6 @@
             android:layout_below="@id/scan_hint"
             android:background="@drawable/shouquan_qrcode_g_gallery"
             android:clickable="true"
-
             android:textSize="20sp" />
         <Button
             android:id="@+id/service_register_rescan"

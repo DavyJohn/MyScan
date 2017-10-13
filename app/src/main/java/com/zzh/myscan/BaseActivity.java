@@ -1,8 +1,10 @@
 package com.zzh.myscan;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.widget.Toast;
@@ -20,9 +22,11 @@ public class BaseActivity extends AppCompatActivity {
      * 提示消息
      */
     private Toast toast;
+    private android.support.v7.app.AlertDialog dialog;
     /**
      *
      */
+
     protected Context mContext;
 
 
@@ -76,6 +80,19 @@ public class BaseActivity extends AppCompatActivity {
             toast.setText(message);
             toast.show();
         }
+    }
+    protected void showMessageDialog(String str, Context context) {
+        dialog = new AlertDialog.Builder(context)
+                .setMessage(str).setTitle("提示")
+                .setPositiveButton("确认", new DialogInterface.OnClickListener() {
+
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+
+                    }
+                }).create();
+        dialog.show();
     }
 
     @Override

@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <android.support.v7.widget.Toolbar
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@android:color/white"
+        android:id="@+id/tool_set">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="地址设置"
+            android:textSize="18sp"
+            android:layout_gravity="center"/>
+    </android.support.v7.widget.Toolbar>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/line_color"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:orientation="horizontal"
+        android:layout_marginTop="5dp"
+        android:background="@android:color/white">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:gravity="center|right"
+                android:layout_marginLeft="10dp"
+                android:layout_height="wrap_content"
+                android:text="服务器地址："
+                android:textSize="18sp"
+                android:textColor="@android:color/black"/>
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/url"
+                android:hint="例如：192.168.1.1"
+                android:background="@null"/>
+    </LinearLayout>
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:text="设  置"
+        android:textColor="@android:color/white"
+        android:textSize="18sp"
+        android:id="@+id/setting_btn"
+        android:layout_marginTop="40dp"
+        android:layout_marginRight="20dp"
+        android:background="@android:color/holo_red_light"
+        android:layout_marginLeft="20dp"/>
+</LinearLayout>

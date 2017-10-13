@@ -45,5 +45,6 @@ public class Constant {
      * 瓶子是否为置换
      * */
     public static Boolean isZH = false;
-    public static String ipUrl = "192.168.6.66:8080";
+    public static String ipUrl = "192.168.6.66:8080";//内网
+//    public static String ipUrl = "192.168.1.200";
 }

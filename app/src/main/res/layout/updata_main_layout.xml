@@ -18,6 +18,30 @@
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:background="@color/line_color"/>
+    //旧瓶子编号
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_marginTop="5dp"
+        android:id="@+id/old_number_layout"
+        android:orientation="horizontal"
+        android:background="@android:color/white">
+        <TextView
+            android:layout_width="100dp"
+            android:gravity="center|right"
+            android:layout_height="wrap_content"
+            android:text="旧瓶编号："
+            android:textColor="@android:color/black"
+            android:textSize="16sp"/>
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@null"
+            android:singleLine="true"
+            android:id="@+id/old_number"
+            android:maxLines="1"/>
+    </LinearLayout>
+    //姓名
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="60dp"
@@ -25,10 +49,10 @@
         android:orientation="horizontal"
         android:background="@android:color/white">
             <TextView
-                android:layout_width="80dp"
+                android:layout_width="100dp"
                 android:gravity="center|right"
                 android:layout_height="wrap_content"
-                android:text="姓名："
+                android:text="用户姓名："
                 android:textColor="@android:color/black"
                 android:textSize="16sp"/>
             <EditText
@@ -40,7 +64,61 @@
                 android:singleLine="true"
                 android:maxLines="1"/>
     </LinearLayout>
+    //身份证
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:background="@android:color/white"
+        android:orientation="horizontal"
+        android:layout_marginTop="3dp">
 
+        <TextView
+            android:layout_width="100dp"
+            android:gravity="center|right"
+            android:layout_height="wrap_content"
+            android:text="身份证号码："
+            android:maxLines="1"
+            android:singleLine="true"
+            android:textColor="@android:color/black"
+            android:textSize="16sp"/>
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/peopleid"
+            android:singleLine="true"
+            android:background="@null"
+            android:maxLines="1"
+            android:hint="输入您需要填写的身份证"
+            android:textSize="16sp"/>
+
+
+    </LinearLayout>
+    //联系电话
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:background="@android:color/white"
+        android:orientation="horizontal"
+        android:layout_marginTop="3dp">
+
+        <TextView
+            android:layout_width="100dp"
+            android:gravity="center|right"
+            android:layout_height="wrap_content"
+            android:text="联系电话："
+            android:textColor="@android:color/black"
+            android:textSize="16sp"/>
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:inputType="phone"
+            android:singleLine="true"
+            android:maxLines="1"
+            android:hint="输入您需要填写的手机号"
+            android:background="@null"
+            android:id="@+id/phonenum"/>
+    </LinearLayout>
+    //地址
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="60dp"
@@ -49,8 +127,7 @@
         android:layout_marginTop="3dp">
 
             <TextView
-                android:id="@+id/textView"
-                android:layout_width="80dp"
+                android:layout_width="100dp"
                 android:layout_height="wrap_content"
                 android:gravity="center|right"
                 android:text="地址："
@@ -68,55 +145,31 @@
 
     </LinearLayout>
 
+    //新瓶编号
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="60dp"
+        android:id="@+id/new_number_layout"
         android:background="@android:color/white"
         android:orientation="horizontal"
         android:layout_marginTop="3dp">
 
-            <TextView
-                android:layout_width="80dp"
-                android:gravity="center|right"
-                android:layout_height="wrap_content"
-                android:text="手机号："
-                android:textColor="@android:color/black"
-                android:textSize="16sp"/>
-            <EditText
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:inputType="phone"
-                android:singleLine="true"
-                android:maxLines="1"
-                android:hint="输入您需要填写的手机号"
-                android:background="@null"
-                android:id="@+id/phonenum"/>
-    </LinearLayout>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:background="@android:color/white"
-        android:orientation="horizontal"
-        android:layout_marginTop="3dp">
+        <TextView
+            android:layout_width="100dp"
+            android:gravity="center|right"
+            android:layout_height="wrap_content"
+            android:text="新瓶编号："
+            android:textColor="@android:color/black"
+            android:textSize="16sp"/>
 
-            <TextView
-                android:layout_width="80dp"
-                android:gravity="center|right"
-                android:layout_height="wrap_content"
-                android:text="身份证："
-                android:textColor="@android:color/black"
-                android:textSize="16sp"/>
-            <EditText
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:id="@+id/peopleid"
-                android:singleLine="true"
-                android:background="@null"
-                android:maxLines="1"
-                android:hint="输入您需要填写的身份证"
-                android:textSize="16sp"/>
-
-
+        <EditText
+            android:id="@+id/new_number"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@null"
+            android:inputType="phone"
+            android:maxLines="1"
+            android:singleLine="true" />
     </LinearLayout>
 
     <Button

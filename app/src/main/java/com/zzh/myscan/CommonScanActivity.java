@@ -209,6 +209,7 @@ public final class CommonScanActivity extends BaseActivity implements ScanListen
                     startActivity(intent);
                 }else if (data != null && Constant.isZH == false){
                     //老瓶子信息  扫描旧罐条码、读取信息、
+                    SharedPreferencesUtil.getInstance(CommonScanActivity.this).putString("oldNum",data.getCylinder_code());
                     SharedPreferencesUtil.getInstance(CommonScanActivity.this).putString("name",data.getUser_name());
                     SharedPreferencesUtil.getInstance(CommonScanActivity.this).putString("phone",data.getPhone_number());
                     SharedPreferencesUtil.getInstance(CommonScanActivity.this).putString("address",data.getAddress());

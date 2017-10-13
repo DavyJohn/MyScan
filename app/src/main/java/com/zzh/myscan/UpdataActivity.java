@@ -7,6 +7,7 @@ import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 
 import com.zhy.http.okhttp.OkHttpUtils;
 import com.zzh.myscan.callback.ToCallBack;
@@ -26,7 +27,14 @@ import okhttp3.Call;
  */
 
 public class UpdataActivity extends BaseActivity {
-
+    @Bind(R.id.old_number_layout)
+    LinearLayout mOldLayout;
+    @Bind(R.id.new_number_layout)
+    LinearLayout mNewLayout;
+    @Bind(R.id.old_number)
+    EditText mOld;
+    @Bind(R.id.new_number)
+    EditText mNew;
     @Bind(R.id.commit_btn)
     Button mCommitBtn;
     @Bind(R.id.change_btn)
@@ -102,15 +110,24 @@ public class UpdataActivity extends BaseActivity {
 
 
     private void initEdit(){
+        mNew.setText(SharedPreferencesUtil.getInstance(UpdataActivity.this).getString("code"));
+
         if (getIntent().getStringExtra("TAG").equals("old")){
             //老瓶子信息
             if (Constant.isZH == true){
                 mCommitBtn.setVisibility(View.VISIBLE);
                 mChangeBtn.setVisibility(View.GONE);
+                mOldLayout.setVisibility(View.VISIBLE);
+                mNewLayout.setVisibility(View.VISIBLE);
             }else {
                 mCommitBtn.setVisibility(View.GONE);
                 mChangeBtn.setVisibility(View.VISIBLE);
+                mOldLayout.setVisibility(View.GONE);
+                mNewLayout.setVisibility(View.GONE);
             }
+
+            mOld.setText(SharedPreferencesUtil.getInstance(UpdataActivity.this).getString("oldNum"));
+
             if (SharedPreferencesUtil.getInstance(UpdataActivity.this).getString("name") != null){
                 username.setText(SharedPreferencesUtil.getInstance(UpdataActivity.this).getString("name"));
             }
@@ -127,6 +144,8 @@ public class UpdataActivity extends BaseActivity {
             //新瓶子
             mChangeBtn.setVisibility(View.GONE);
             mCommitBtn.setVisibility(View.VISIBLE);
+            mOldLayout.setVisibility(View.GONE);
+            mNewLayout.setVisibility(View.VISIBLE);
         }
 
     }

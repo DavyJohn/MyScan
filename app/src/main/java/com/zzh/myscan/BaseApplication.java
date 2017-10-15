@@ -39,9 +39,9 @@ public class BaseApplication extends Application{
     public void onCreate() {
         super.onCreate();
         mcontext = this;
-        StrictMode.VmPolicy.Builder builder = new StrictMode.VmPolicy.Builder();
-        StrictMode.setVmPolicy(builder.build());
-        builder.detectFileUriExposure();
+//        StrictMode.VmPolicy.Builder builder = new StrictMode.VmPolicy.Builder();
+//        StrictMode.setVmPolicy(builder.build());
+//        builder.detectFileUriExposure();
         mHandler = new Handler();
         mMainThread = Thread.currentThread();
         mMainThreadId = android.os.Process.myTid();
@@ -50,7 +50,6 @@ public class BaseApplication extends Application{
                 .connectTimeout(10000L, TimeUnit.MILLISECONDS)
                 .readTimeout(10000L, TimeUnit.MILLISECONDS)
                 .build();
-
         OkHttpUtils.initClient(okHttpClient);
     }
 

@@ -184,8 +184,10 @@ public final class CommonScanActivity extends BaseActivity implements ScanListen
         tv_scan_result.setVisibility(View.VISIBLE);
         //获取数据地方
 //        tv_scan_result.setText("结果："+"http://"+Constant.ipUrl+"/yhqg/app/getCustomerByID"+"/"+rawResult.getText());
-        if (rawResult.getText().contains("http:")){
-            SharedPreferencesUtil.getInstance(CommonScanActivity.this).putString("code",rawResult.getText().substring(rawResult.getText().lastIndexOf("/"),rawResult.getText().length()));//钢瓶编号
+        
+        if (rawResult.getText().contains("http:") ||rawResult.getText().contains("https:") ){
+            int  num = rawResult.getText().lastIndexOf("/")+1;
+            SharedPreferencesUtil.getInstance(CommonScanActivity.this).putString("code",rawResult.getText().substring(rawResult.getText().lastIndexOf("/")+1,rawResult.getText().length()));//钢瓶编号
             getData("http://"+Constant.ipUrl+"/yhqg/app/getCustomerByID"+rawResult.getText().substring(rawResult.getText().lastIndexOf("/"),rawResult.getText().length()));
         }else {
             SharedPreferencesUtil.getInstance(CommonScanActivity.this).putString("code",rawResult.getText());//钢瓶编号

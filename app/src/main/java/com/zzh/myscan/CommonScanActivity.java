@@ -186,7 +186,10 @@ public final class CommonScanActivity extends BaseActivity implements ScanListen
     @Override
     public void onResume() {
         super.onResume();
-        scanManager.onResume();
+        //这边会报错8.08
+        if (scanManager != null){
+            scanManager.onResume();
+        }
         rescan.setVisibility(View.INVISIBLE);
         scan_image.setVisibility(View.GONE);
     }
@@ -194,7 +197,10 @@ public final class CommonScanActivity extends BaseActivity implements ScanListen
     @Override
     public void onPause() {
         super.onPause();
-        scanManager.onPause();
+        if (scanManager != null){
+            scanManager.onPause();
+        }
+
     }
     /**
      *

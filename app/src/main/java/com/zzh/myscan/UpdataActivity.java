@@ -57,12 +57,6 @@ public class UpdataActivity extends BaseActivity {
     @OnClick(R.id.commit_btn) void commit(){
         if (TextUtils.isEmpty(username.getText().toString())){
             showToast("用户名不能为空！");
-        }else if (TextUtils.isEmpty(address.getText().toString())){
-            showToast("用户地址不能为空！");
-        }else if (TextUtils.isEmpty(phone.getText().toString())){
-            showToast("用户手机号不能为空！");
-        }else if (TextUtils.isEmpty(id.getText().toString())){
-            showToast("用户身份信息不能为空！");
         }else {
             //保存
             commitData();

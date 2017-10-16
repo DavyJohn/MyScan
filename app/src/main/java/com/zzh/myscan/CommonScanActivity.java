@@ -19,14 +19,19 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Parcelable;
 import android.provider.MediaStore;
+import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
+import android.text.TextUtils;
 import android.view.SurfaceView;
 import android.view.View;
 import android.view.Window;
@@ -96,15 +101,29 @@ public final class CommonScanActivity extends BaseActivity implements ScanListen
     @Override
     public void onCreate(Bundle icicle) {
         super.onCreate(icicle);
-        Window window = getWindow();
-        window.addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
+//        Window window = getWindow();
+//        window.addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
         setContentView(R.layout.activity_scan_code);
         ButterKnife.bind(this);
-        initPermission();
-        scanMode = Constant.REQUEST_SCAN_MODE_ALL_MODE;//直接判定为所有的都扫描
+        scanMode = Constant.REQUEST_SCAN_MODE_ALL_MODE;
+        if (Build.VERSION.SDK_INT>22){
+            if (ContextCompat.checkSelfPermission(CommonScanActivity.this,
+                    android.Manifest.permission.CAMERA)!= PackageManager.PERMISSION_GRANTED){
+                //先判断有没有权限 ，没有就在这里进行权限的申请
+                initPermission();
+            }else {
+                //说明已经获取到摄像头权限了 想干嘛干嘛
+                initView();
+            }
+        }else {
+            //这个说明系统版本在6.0之下，不需要动态获取权限。
+            initView();
+        }
+//        initPermission();
 //        scanMode=getIntent().getIntExtra(Constant.REQUEST_SCAN_MODE,Constant.REQUEST_SCAN_MODE_ALL_MODE);
-        initView();
+//        initView();
     }
+
     private void initPermission() {
         //检查权限
         String[] permissions = CheckPermissionUtils.checkPermission(this);
@@ -115,7 +134,25 @@ public final class CommonScanActivity extends BaseActivity implements ScanListen
             ActivityCompat.requestPermissions(this, permissions, 100);
         }
     }
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        if (requestCode == 100) {
+            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                //申请成功
+                initView();
+            } else {
+                Toast.makeText(this, "CAMERA PERMISSION DENIED", Toast.LENGTH_SHORT).show();
+            }
+            return;
+        }
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+    }
     void initView() {
+        if (SharedPreferencesUtil.getInstance(this).getString("ipUrl") == null || TextUtils.isEmpty(SharedPreferencesUtil.getInstance(this).getString("ipUrl"))){
+            //默认初始值
+        }else {
+            Constant.ipUrl = SharedPreferencesUtil.getInstance(this).getString("ipUrl");
+        }
         switch (scanMode){
             case DecodeThread.BARCODE_MODE://目前不需要
                 title.setText(R.string.scan_barcode_title);
@@ -184,16 +221,15 @@ public final class CommonScanActivity extends BaseActivity implements ScanListen
         tv_scan_result.setVisibility(View.VISIBLE);
         //获取数据地方
 //        tv_scan_result.setText("结果："+"http://"+Constant.ipUrl+"/yhqg/app/getCustomerByID"+"/"+rawResult.getText());
-        
+
         if (rawResult.getText().contains("http:") ||rawResult.getText().contains("https:") ){
-            int  num = rawResult.getText().lastIndexOf("/")+1;
-            SharedPreferencesUtil.getInstance(CommonScanActivity.this).putString("code",rawResult.getText().substring(rawResult.getText().lastIndexOf("/")+1,rawResult.getText().length()));//钢瓶编号
+            String data = rawResult.getText().substring(rawResult.getText().lastIndexOf("/")+1,rawResult.getText().length());
+            SharedPreferencesUtil.getInstance(CommonScanActivity.this).putString("code",data);//钢瓶编号
             getData("http://"+Constant.ipUrl+"/yhqg/app/getCustomerByID"+rawResult.getText().substring(rawResult.getText().lastIndexOf("/"),rawResult.getText().length()));
         }else {
             SharedPreferencesUtil.getInstance(CommonScanActivity.this).putString("code",rawResult.getText());//钢瓶编号
 //            getData("http://192.168.6.66:8080/yhqg/app/getCustomerByID/312312123");
             getData("http://"+Constant.ipUrl+"/yhqg/app/getCustomerByID"+"/"+rawResult.getText());
-
         }
     }
     void getData(String url){

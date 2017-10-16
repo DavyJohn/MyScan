@@ -3,6 +3,7 @@ package com.zzh.myscan;
 import android.app.Activity;
 import android.app.Application;
 import android.content.Context;
+import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Environment;
 import android.os.Handler;
@@ -10,6 +11,8 @@ import android.os.Looper;
 import android.os.StrictMode;
 import android.support.annotation.RequiresApi;
 import android.support.multidex.MultiDex;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 
 import com.zhy.http.okhttp.OkHttpUtils;
 
@@ -39,9 +42,10 @@ public class BaseApplication extends Application{
     public void onCreate() {
         super.onCreate();
         mcontext = this;
-//        StrictMode.VmPolicy.Builder builder = new StrictMode.VmPolicy.Builder();
-//        StrictMode.setVmPolicy(builder.build());
-//        builder.detectFileUriExposure();
+        //低版本 有问题
+        StrictMode.VmPolicy.Builder builder = new StrictMode.VmPolicy.Builder();
+        StrictMode.setVmPolicy(builder.build());
+        builder.detectFileUriExposure();
         mHandler = new Handler();
         mMainThread = Thread.currentThread();
         mMainThreadId = android.os.Process.myTid();

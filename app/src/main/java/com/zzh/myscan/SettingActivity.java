@@ -2,13 +2,13 @@ package com.zzh.myscan;
 
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
-import android.text.InputType;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
 import com.zzh.myscan.utils.Constant;
+import com.zzh.myscan.utils.SharedPreferencesUtil;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -29,6 +29,7 @@ public class SettingActivity extends BaseActivity {
     @OnClick(R.id.setting_btn) void set(){
         if (!TextUtils.isEmpty(mEdit.getText().toString())){
             Constant.ipUrl = mEdit.getText().toString();
+            SharedPreferencesUtil.getInstance(this).putString("ipUrl",mEdit.getText().toString());
             finish();
         }else {
             showToast("服务器地址不能为空！");
@@ -49,5 +50,12 @@ public class SettingActivity extends BaseActivity {
                 finish();
             }
         });
+
+        if (SharedPreferencesUtil.getInstance(this).getString("ipUrl") == null || TextUtils.isEmpty(SharedPreferencesUtil.getInstance(this).getString("ipUrl"))){
+            //默认初始值
+            mEdit.setText(Constant.ipUrl);
+        }else {
+            mEdit.setText(SharedPreferencesUtil.getInstance(this).getString("ipUrl"));
+        }
     }
 }

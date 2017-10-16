@@ -40,7 +40,6 @@ public class Constant {
      */
     public static final int REQUEST_SCAN_MODE_ALL_MODE = 0X300;
 
-
     /**
      * 瓶子是否为置换
      * */
